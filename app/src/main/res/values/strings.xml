@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fetch Challenge</string>
+    <string name="failed_to_load">Failed to load fetched data.</string>
+    <string name="retry">Retry</string>
 </resources>
