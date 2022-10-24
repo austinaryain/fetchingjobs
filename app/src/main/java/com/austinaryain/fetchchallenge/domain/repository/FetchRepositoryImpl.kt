@@ -15,11 +15,10 @@ class FetchRepositoryImpl @Inject constructor(private val remoteDataSource: Fetc
         return withContext(Dispatchers.IO) {
             remoteDataSource.getRemoteData().fold(
                 {
-                    Either.left(it)
+                    Either.Left(it)
                 },
                 { response ->
-                    val filtered = response.filter { !it.name.isNullOrEmpty() }.sortedBy { it.name }
-                    Either.right(DataResponse(data = filtered.groupBy { it.listId }.toSortedMap()))
+                    Either.Right(DataResponse(response.filter { !it.name.isNullOrEmpty() }))
                 }
             )
         }

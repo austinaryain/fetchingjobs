@@ -3,7 +3,7 @@ package com.austinaryain.fetchchallenge.data.models
 import kotlinx.serialization.Serializable
 
 data class DataResponse(
-    val data: Map<Int, List<FetchItem>>
+    val data: List<FetchItem>
 )
 
 @Serializable

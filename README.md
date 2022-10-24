@@ -1,16 +1,14 @@
 # Fetch Rewards
 
-Hi! My name is Austin Aryain and this is my Android Developer challenge for Fetch Rewards.
+My name is Austin Aryain and this is my Android Developer challenge for Fetch Rewards.
 
 
-# Libraries
-For clean, declarative recyclerviews I use the Library Epoxy by AirBnB.
-  
-For a better user experience with a large list of data I use a Swipe Refresh Layout.
+## Libraries
+For UI I used Jetpack Compose.
 
 For Dependency Injection I chose to use Dagger Hilt.
 
-For the network request I decided to setup a Retrofit Client.
+For the network request I decided to setup a Retrofit client.
  
 For simple JSON Serialization I used Kotlinx Serialization and Jake Wharton's Retrofit converter.
 
