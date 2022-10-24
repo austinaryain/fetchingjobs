@@ -15,12 +15,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.austinaryain.fetchchallenge.R
 import com.austinaryain.fetchchallenge.data.models.FetchItem
 import com.austinaryain.fetchchallenge.databinding.MainFragmentBinding
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -88,7 +90,7 @@ class MainFragment : Fragment() {
                             Loading()
                         }
                         else -> {
-                            Info("Something went wrong..", true)
+                            Info(stringResource(R.string.something_went_wrong), true)
                         }
                     }
                 }
@@ -167,7 +169,7 @@ class MainFragment : Fragment() {
         LinearProgressIndicator(
             modifier = Modifier.fillMaxWidth()
         )
-        Text("Loading...")
+        Text(stringResource(R.string.loading))
     }
 
     override fun onDestroyView() {
