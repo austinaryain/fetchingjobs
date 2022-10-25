@@ -25,9 +25,9 @@ class MainViewModel @Inject constructor(private val repository: FetchRepository)
         data class Empty(val resId: Int) : ViewState()
     }
 
-    private val _viewState = MutableLiveData<ViewState>(ViewState.Loading)
-    val viewState: LiveData<ViewState>
-        get() = _viewState
+    private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
+    val viewState: StateFlow<ViewState>
+        get() = _viewState.asStateFlow()
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean>
@@ -38,18 +38,18 @@ class MainViewModel @Inject constructor(private val repository: FetchRepository)
     }
 
     fun loadData() {
-        _viewState.postValue(ViewState.Loading)
+        _viewState.tryEmit(ViewState.Loading)
         viewModelScope.launch {
             repository.getData().fold(
                 {
                     Log.e("LOAD_ERROR", it.localizedMessage.orEmpty())
-                    _viewState.postValue(ViewState.LoadFailed(R.string.failed_to_load))
+                    _viewState.emit(ViewState.LoadFailed(R.string.failed_to_load))
                 },
                 {
-                    _viewState.postValue(
+                    _viewState.emit(
                         when (it.data.isEmpty()) {
                             true -> ViewState.Empty(R.string.no_results)
-                            false -> ViewState.LoadSuccess(groupData(it.data))
+                            false -> ViewState.LoadSuccess(processResponse(it.data))
                         }
                     )
                 }
@@ -57,7 +57,7 @@ class MainViewModel @Inject constructor(private val repository: FetchRepository)
         }
     }
 
-    private fun groupData(data: List<FetchItem>): Map<Int, List<FetchItem>> {
+    private fun processResponse(data: List<FetchItem>): Map<Int, List<FetchItem>> {
         return data.sortedBy { it.id }
             .groupBy { it.listId }.toSortedMap()
     }

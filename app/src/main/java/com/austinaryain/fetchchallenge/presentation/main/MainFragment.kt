@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -67,8 +66,7 @@ class MainFragment : Fragment() {
     fun ListScreen(mainViewModel: MainViewModel) {
 
         val refreshing by mainViewModel.isRefreshing.collectAsState()
-
-        val state = mainViewModel.viewState.observeAsState()
+        val state = mainViewModel.viewState.collectAsState()
 
         SwipeRefresh(
             state = rememberSwipeRefreshState(refreshing),
