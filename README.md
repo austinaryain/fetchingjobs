@@ -1,6 +1,6 @@
 # Fetch Rewards
 
-My name is Austin Aryain and this is my Android Developer challenge for Fetch Rewards.
+Android Developer challenge for Fetch Rewards.
 
 
 ## Libraries
